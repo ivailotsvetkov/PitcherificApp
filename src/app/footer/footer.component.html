@@ -1,0 +1,19 @@
+<footer class="bg-color-white">
+    <div class="wrapped footer-content" fxLayout="row" fxLayoutAlign="space-between center">    
+        <div class="show-time-wrap">
+            <i class="fa fa-clock-o"></i>
+            <span
+          [ngClass]="{'over-time': totalTime > commonService.selectedTemplate.timeLimit}">{{( (commonService.totalTime - (commonService.totalTime % 60)) / 60 ) | number: '2.0-0'}}:{{(commonService.totalTime % 60) | number: '2.0-0'}}</span>
+            <span>/{{( (commonService.selectedTemplate.timeLimit - (commonService.selectedTemplate.timeLimit % 60)) / 60 ) | number: '2.0-0'}}:{{
+              (commonService.selectedTemplate.timeLimit % 60) | number: '2.0-0'}}</span>   
+          </div>
+          <div class="footer-btn-wrap">
+            <button mat-raised-button color="accent">
+              Save
+            </button>
+            <button mat-raised-button color="primary">
+              Practice
+            </button>
+          </div>
+        </div>
+      </footer>

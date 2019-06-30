@@ -1,0 +1,21 @@
+<header class="bg-color-white">
+        <div class="wrapped">
+          <div class="c-nav__content c-nav__content--brand">
+            <div class="c-nav__item c-logo-container fill-remaining-space">
+              <a href="/" target="_blank">
+                <img class="c-logo-mark"
+                  src="assets/img/icons-touch/apple-touch-icon-57x57-282f127414a241bfa197a283d4ccbd80.png" width="32"
+                  height="32" />
+              </a>
+            </div>
+          </div>
+          <div class="c-nav__content c-nav__content--action dropdown" ngCloak>
+            <a href="#" class="c-nav__item dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+              aria-expanded="false" [matMenuTriggerFor]="topMenu"><span><i class="fa fa-cog"></i></span></a>
+            <mat-menu #topMenu="matMenu">
+              <button mat-menu-item>Sign in</button>
+              <button mat-menu-item>English</button>
+            </mat-menu>
+          </div>
+        </div>
+      </header>

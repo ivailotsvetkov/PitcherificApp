@@ -1,0 +1,90 @@
+<div class="pitch-container pitch-paper">
+        <div>
+          <input type="text" matInput class="pitch-title" placeholder="✎ My awesome pitch" maxlength="36"
+            autocomplete="off">
+        </div>
+        <div fxLayout.xs="column" fxLayout="row" fxLayoutAlign="start start">
+          <div fxFlex="30" fxLayout="column" fxLayoutAlign="start start" class="pr-4">
+            <div class="pitch-btn-label">
+              <span>Select Template</span>
+            </div>
+            <div class="pitch-btn-wrap w-100">
+              <button fxFlex="100" [matMenuTriggerFor]="pickTemplate" class="w-100" mat-raised-button color="warn">
+                {{commonService.selectedTemplate.name}}
+              </button>
+              <mat-menu #pickTemplate="matMenu">
+                <app-vertical-menu [menuItems]="menuItems" [menuParentId]="0">
+                </app-vertical-menu>
+              </mat-menu>
+            </div>
+          </div>
+          <div fxFlex="40" fxLayout="column" fxLayoutAlign="start start">
+            <div class="pitch-btn-label">
+              <span>Set Time Limit</span>
+            </div>
+            <div class="pitch-btn-wrap">
+              <button fxFlex="100" class="w-100" mat-raised-button color="warn" [matMenuTriggerFor]="selectTimeLimit">
+                {{commonService.selectedTemplate.selectedOption.name}}
+              </button>
+              <mat-menu #selectTimeLimit="matMenu">
+                <button mat-menu-item disabled>Set Time Limit</button>
+                <button class="select-time-option" *ngFor="let option of commonService.selectedTemplate.timeLimitOptions"
+                  mat-menu-item
+                  [ngClass]="{'time-option-selected': commonService.selectedTemplate.selectedOption.value == option.value}"
+                  (click)="commonService.selectTimeLimit(option);">
+                  <!-- (click)="commonService.selectedTemplate.selectedOption = option"> -->
+                  {{option.name}}
+                  <div class="time-pro-mark" *ngIf="option.value > commonService.selectedTemplate.freeTimeLimit">PRO</div>
+                </button>
+              </mat-menu>
+            </div>
+          </div>
+          <div fxFlex="30" fxLayout="column" fxLayoutAlign="start start">
+            <div class="pitch-btn-label">
+              <span>Save Your Hard Work</span>
+            </div>
+            <div class="pitch-btn-wrap">
+              <button fxFlex="100" class="w-100" mat-raised-button color="accent">
+                Create A Free User
+              </button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="commonService.selectedTemplate">
+          <div class="pitch-section" *ngFor="let section of commonService.selectedTemplate.sections; let i = index;">
+            <div class="pitch-section-header" fxLayout="row" fxLayoutAlign="space-between start">
+              <div class="pitch-section-title">
+                {{section.sectionName}}
+              </div>
+              <div class="pitch-section-calculation">
+                {{section.content.length}} of recommended
+                {{section.recommendedChars}} chars,
+                {{((section.content.length - (section.content.length%15)) / 15) | number:'1.0-0'}} seconds
+                <div class="over-flow-mark"
+                  [ngClass]="{'over-flow-warn': section.content.length > section.recommendedChars}"></div>
+              </div>
+            </div>
+            <div class="pitch-section-content-wrap">
+              <textarea type="text" class="pitch-section-content" rows="10" matInput value=""
+                [placeholder]="section.description" [(ngModel)]="section.content" (input)="commonService.changeContent($event)"
+                (focus)="commonService.selectedSectionId = section.id">
+              </textarea>
+            </div>
+            <div>
+              <mat-chip-list>
+                <mat-chip color="warn" [matTooltip]="section.description" matTooltipClass="example-tooltip-color"
+                  [ngClass]="{'display-none': commonService.selectedSectionId != section.id}">
+                  <i class="fa fa-info pr-2"></i>Description
+                </mat-chip>
+                <mat-chip color="warn" [matTooltip]="section.example" matTooltipClass="example-tooltip-color"
+                [ngClass]="{'display-none': commonService.selectedSectionId != section.id}">
+                  <i class="fa fa-lightbulb-o pr-2"></i>Example</mat-chip>
+                <a mat-chip href="{{section.inspired}}"  id="color-blue" [matTooltip]="section.inspired" matTooltipClass="example-tooltip-color"
+                  [ngClass]="{'display-none': commonService.selectedSectionId != section.id}">
+                  <i class="fa fa-graduation-cap pr-2"></i>Be inspired</a>
+              </mat-chip-list>
+            </div>
+    
+          </div>
+        </div>
+      </div>

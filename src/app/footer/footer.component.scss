@@ -1,0 +1,35 @@
+footer {
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.15);
+    padding: 0.75rem 0;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    z-index: 1000;
+  
+    .footer-content {
+      padding: 0 1rem;
+      .show-time-wrap {
+        padding: 1.618rem;
+        i {
+          padding-right: 0.5rem;
+        }
+        & > span {
+          font-size: 1.854rem;
+          font-weight: 700;
+        }
+        & > span:last-child {
+          color: #777;
+        }
+        .over-time {
+          color: #e44335 !important;
+        }
+      }
+      .footer-btn-wrap {
+        & > button:last-child {
+          margin-left: 1rem;
+        }
+      }
+    }
+  }
+  
+  
